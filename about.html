@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="mcWeb">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>关于我们</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate.css"/>
+		<link rel="stylesheet" type="text/css" href="css/conmon.css" />
+		<link rel="stylesheet" type="text/css" href="css/about.css" />
+		<script src="js/min.js" type="text/javascript"></script>
+	</head>
+
+	<body>
+		<div class="meicool_wrap" ng-controller="about">
+			<ng-include src ="'conmon/head_con.html'"></ng-include>
+			<ng-include src ="'conmon/head_menu.html'"></ng-include>
+			<div class="about_banner">
+				<ul class="slide_box"></ul>
+			</div>
+			<div class="aboutContent">
+				<div class="about_box">
+					<div class="about_sign"><img src="img/about_01.png"/></div>
+					<div class="about_cont">
+						<h1 class="about_title">关于我们</h1>
+						<div class="about_exp"></div>
+					</div>	
+				</div>
+				<div class="about_box">
+					<div class="about_sign"><img src="img/about_02.png"/></div>
+					<div class="about_cont">
+						<h1 class="about_title">企业文化</h1>
+						<div class="about_exp"></div>
+					</div>	
+				</div>	
+			</div>
+			<div class="core_box">
+				<h2 class="core_title">核心团队</h2>
+				<div class="core_con">
+					<div class="coreBlock">
+						<div class="core_photo"></div>
+						<div class="core_name"></div>	
+						<div class="core_exp">
+							
+						</div>	
+					</div>
+					<div class="coreBlock">
+						<div class="core_photo"></div>
+						<div class="core_name"></div>	
+						<div class="core_exp">
+							
+						</div>	
+					</div>
+				</div>
+			</div>
+			<ng-include src ="'conmon/foot.html'"></ng-include>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,96 @@
+.propaContent{
+	padding-top: 125px;
+	padding-bottom: 50px;
+	position: relative;
+}
+.pro_menu{
+	width: 1080px;
+	margin: 190px auto 0 auto;
+}
+.pro_menu:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+.show_box .pro_menu:nth-child(1){
+	margin-top: 0;
+}
+
+.show_box .pro_menu:nth-child(odd) .pro_exp{
+	float: left;
+	width: 450px;
+	margin-top: 50px;
+}
+.show_box .pro_menu:nth-child(odd) .pro_sign{
+	float: right;
+	display: inline-block;
+}
+.show_box .pro_menu:nth-child(even) .pro_exp{
+	float: right;
+	width: 450px;
+	margin-top: 50px;
+}
+.show_box .pro_menu:nth-child(even) .pro_sign{
+	float: left;
+	padding-top: 100px;
+	display: inline-block;
+}
+
+/*2n+1 (odd)*/
+.show_box .pro_menu:nth-child(odd) .pro_exp .pro_h{
+	font-size: 55px;
+	color: #3f3f3f;
+}
+.show_box .pro_menu:nth-child(odd) .pro_exp .expBox{
+	margin-top: 42px;
+}
+.show_box .pro_menu:nth-child(odd) .pro_exp .expBox .exp_h{
+	font-size: 28px;
+	color: #f26e93;
+}
+.show_box .pro_menu:nth-child(odd) .pro_exp .expBox .exp_con{
+	font-size: 17px;
+	color: #999;
+	margin-top: 20px;
+}
+.show_box .pro_menu:nth-child(odd) .pro_exp .expBox .exp_h::before{
+	content: "";
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	margin-right: 20px;
+	background: url(../img/arrow.png) no-repeat;
+	background-size: 100%;
+	vertical-align: bottom;
+}
+/*2n (even)*/
+.show_box .pro_menu:nth-child(even) .pro_exp .pro_h{
+	font-size: 55px;
+	color: #3f3f3f;
+	text-align: right;
+}
+.show_box .pro_menu:nth-child(even) .pro_exp .expBox{
+	margin-top: 42px;
+}
+.show_box .pro_menu:nth-child(even) .pro_exp .expBox .exp_h{
+	font-size: 28px;
+	color: #f26e93;
+	text-align: right;
+}
+.show_box .pro_menu:nth-child(even) .pro_exp .expBox .exp_con{
+	font-size: 17px;
+	color: #999;
+	margin-top: 20px;
+	text-align: right;
+}
+.show_box .pro_menu:nth-child(even) .pro_exp .expBox .exp_h::before{
+	content: "";
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	margin-right: 20px;
+	background: url(../img/arrow.png) no-repeat;
+	background-size: 100%;
+	vertical-align: bottom;
+}
+

@@ -1,0 +1,98 @@
+.fnContent{
+	padding-top: 125px;
+}
+.fnContent .fn_wrap:nth-child(odd){
+	background: #FFFFFF;
+	padding: 100px 0;
+	position: relative;
+}
+.fnContent .fn_wrap:nth-child(even){
+	background: #f7f7f7;
+	padding: 100px 0;
+	position: relative;
+}
+.fn_menu{
+	width: 1080px;
+	margin: 0 auto;
+}
+.fn_menu:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.intor_box .fn_wrap:nth-child(odd) .fn_menu .fn_exp{
+	float: right;
+	width: 480px;
+}
+.intor_box .fn_wrap:nth-child(odd) .fn_menu .fn_sign{
+	float: left;
+	display: inline-block;
+	/*??*/
+}
+
+.intor_box .fn_wrap:nth-child(even) .fn_menu .fn_exp{
+	float: left;
+	width: 480px;
+}
+.intor_box .fn_wrap:nth-child(even) .fn_menu .fn_sign{
+	float: right;
+	display: inline-block;
+	/*??*/
+}
+/**2n+1(odd)**/
+.intor_box .fn_wrap:nth-child(odd) .fn_menu .fn_exp .fn_h{
+	font-size: 55px;
+	color: #3f3f3f;
+}
+.intor_box .fn_wrap:nth-child(odd) .fn_menu .fn_exp .fnExpBox{
+	margin-top: 30px;
+	width: 400px;
+}
+.intor_box .fn_wrap:nth-child(odd) .fn_menu .fn_exp .fnExpBox .fnExp_h{
+	font-size: 28px;
+	color: #f26e93;
+}
+.intor_box .fn_wrap:nth-child(odd) .fn_menu .fn_exp .fnExpBox .fnExp_con{
+	font-size: 17px;
+	color: #999;
+	margin-top: 15px;
+}
+.intor_box .fn_wrap:nth-child(odd) .fn_menu .fn_exp .fnExpBox .fnExp_h:before{
+	content: "";
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	margin-right: 20px;
+	background: url(../img/arrow.png) no-repeat;
+	background-size: 100%;
+	vertical-align: bottom;
+}
+/**2n(even)**/
+.intor_box .fn_wrap:nth-child(even) .fn_menu .fn_exp .fn_h{
+	font-size: 55px;
+	color: #3f3f3f;
+}
+.intor_box .fn_wrap:nth-child(even) .fn_menu .fn_exp .fnExpBox{
+	margin-top: 30px;
+	width: 400px;
+}
+.intor_box .fn_wrap:nth-child(even) .fn_menu .fn_exp .fnExpBox .fnExp_h{
+	font-size: 28px;
+	color: #f26e93;
+}
+.intor_box .fn_wrap:nth-child(even) .fn_menu .fn_exp .fnExpBox .fnExp_con{
+	font-size: 17px;
+	color: #999;
+	margin-top: 15px;
+}
+.intor_box .fn_wrap:nth-child(even) .fn_menu .fn_exp .fnExpBox .fnExp_h:before{
+	content: "";
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	margin-right: 20px;
+	background: url(../img/arrow.png) no-repeat;
+	background-size: 100%;
+	vertical-align: bottom;
+}

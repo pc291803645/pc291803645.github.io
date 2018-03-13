@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="mcWeb">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>推广传播</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate.css"/>
+		<link rel="stylesheet" type="text/css" href="css/conmon.css" />
+		<link rel="stylesheet" type="text/css" href="css/propaExten.css" />
+		<script src="js/min.js" type="text/javascript"></script>
+	</head>
+
+	<body>
+		<div class="meicool_wrap" ng-controller="propa">
+			<ng-include src ="'conmon/head_con.html'"></ng-include>
+			<ng-include src ="'conmon/head_menu.html'"></ng-include>
+			<div class="propaContent">
+				<div class="show_box">
+					<div class="pro_menu">
+						<div class="pro_exp">
+							<h1 class="pro_h">分发渠道</h1>
+							<div class="expBox">
+								<h2 class="exp_h">主流媒体</h2>
+								<p class="exp_con">同步推送到微信、QQ空间、QQ好友、微博等主流媒体，图文、音频、视频直播，呈现形式更丰富</p>
+							</div>
+							<div class="expBox">
+								<h2 class="exp_h">首页推荐</h2>
+								<p class="exp_con">置顶突出，重点推荐，获取更多关注，提升活动影响力</p>
+							</div>
+						</div>
+						<div class="pro_sign"><img src="img/propa_01.png"/></div>
+					</div>
+					<div class="pro_menu">
+						<div class="pro_exp">
+							<h1 class="pro_h">跨平台 高并发</h1>
+							<div class="expBox">
+								<h2 class="exp_h">跨平台观看</h2>
+								<p class="exp_con">微信、H5、PC、APP等全平台观看</p>
+							</div>
+							<div class="expBox">
+								<h2 class="exp_h">一键分享</h2>
+								<p class="exp_con">一键分享微博、微信等社交媒体平台</p>
+							</div>
+							<div class="expBox">
+								<h2 class="exp_h">清晰流畅</h2>
+								<p class="exp_con">百万并发，高清、稳定、无卡顿</p>
+							</div>
+						</div>
+						<div class="pro_sign"><img src="img/propa_02.png"/></div>
+					</div>	
+				</div>
+				<a class="purch_ser" href="javascript:;">购买服务</a>
+				<!--动态-->
+				<ng-include src ="'conmon/backg.html'"></ng-include>
+			</div>
+			<ng-include src ="'conmon/foot.html'"></ng-include>
+		</div>
+	</body>
+
+</html>
