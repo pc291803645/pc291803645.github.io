@@ -26,7 +26,7 @@
 		<script type="text/javascript">
 			var appID = "wx3c24ff62adc55b88";                      //开发者ID(AppID)
 			var appsecret = "548c4ea93207b661aab7627839088352";    //开发者密码
-			var current_url = encodeURI(getCurrentUrl());			//当前url
+			var current_url = encodeURIComponent(getCurrentUrl());			//当前url
 			var code = GetQueryStr('code');
 			
 			if(!code) { 											//静默授权：scope=snsapi_base  一般授权scope=snsapi_userinfo 
