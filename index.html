@@ -36,9 +36,20 @@
 			}
 			
 			//第二步：通过code换取网页授权access_token
-			$.getJSON("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appID+"&secret="+appsecret+"&code="+code+"&grant_type=authorization_code",function(data){
-				console.log(data);
-			})
+			var a_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appID+"&secret="+appsecret+"&code="+code+"&grant_type=authorization_code";
+			$.ajax({
+				url:"http://query.yahooapis.com/v1/public/yql",
+				dataType:"jsonp",
+				data: {
+					q: "select*from json where url=\'" + a_url + "'",
+					format:'json'
+				},
+				success: function(data){
+					console.log(data);
+				}
+			});
+			
+			
 			
 			
 			
