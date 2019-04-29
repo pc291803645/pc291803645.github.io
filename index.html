@@ -29,35 +29,73 @@
 			var current_url = encodeURIComponent(getCurrentUrl());	//当前url
 			var code = GetQueryStr('code');							//url的code
 			var jsonBird = "https://bird.ioliu.cn/v1/?url="   		//jsonBird 是第三方跨域代理
-			var refresh_token;										//用户刷新access_token;
-			var	openid;												//用户唯一标识，请注意，在未关注公众号时，用户访问公众号的网页，也会产生一个用户和公众号唯一的OpenID
+			var refresh_token = getStorage("refresh_token")?getStorage("refresh_token"):"";	//用户刷新access_token;
+			var access_token  = getStorage("access_token")?getStorage("access_token"):"";	//网页授权接口调用凭证,注意：此access_token与基础支持的access_token不同
+			var	openid = getStorage("openid")?getStorage("openid"):"";						//用户唯一标识，请注意，在未关注公众号时，用户访问公众号的网页，也会产生一个用户和公众号唯一的OpenID
 			
-			console.log(code);
 			
-			//第一步：用户同意授权，获取code
-			if(!code) { 											//静默授权：scope=snsapi_base  一般授权scope=snsapi_userinfo 
+			//用户同意授权，获取code。静默授权：scope=snsapi_base  一般授权scope=snsapi_userinfo 
+			if(!code) { //
 				var urls = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
 				location.href = urls;
 			}
 			
-			//第二步：通过code换取网页授权access_token
-			$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appID+"&secret="+appsecret+"&code="+code+"&grant_type=authorization_code",function(data){
-				refresh_token = data.refresh_token;
-				openid = data.openid;
+			
+			getAccess_token(appID,appsecret,code).then(function(data){
 				console.log(data);
 			})
 			
-//			//第三步：刷新access_token（如果需要）
-//			$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid="+appID+"&grant_type=refresh_token&refresh_token="+refresh_token,function(data){
-//				console.log(data);
-//			})
+			
+			
+			function getAccess_token(appID,appsecret,code){  //通过code换取网页授权access_token
+				var deferred = $.Deferred();
+				$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appID+"&secret="+appsecret+"&code="+code+"&grant_type=authorization_code",function(data){
+					if(!data.errmsg){
+						console.log("错误");
+					}else{
+						deferred.resolve(data);
+					}
+				})
+				return deferred.promise();
+			}
+			function refresh_token(appID,refresh_token){  //刷新access_token（如果需要）
+				var deferred = $.Deferred();
+				$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid="+appID+"&grant_type=refresh_token&refresh_token="+refresh_token,function(data){
+					if(!data.errmsg){
+						console.log("错误");
+					}else{
+						deferred.resolve(data);
+					}
+				})
+				return deferred.promise();
+			}
+			
+			function getUserinfo(access_token,openid){  //拉取用户信息(需scope为 snsapi_userinfo)
+				var deferred = $.Deferred();
+				$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/userinfo?access_token="+access_token+"&openid="+openid+"&lang=zh_CN",function(data){
+					if(!data.errmsg){
+						console.log("错误");
+					}else{
+						deferred.resolve(data);
+					}
+				})
+				return deferred.promise();
+			}
+			
+			function yzAccess_token(access_token,openid){  //检验授权凭证（access_token）是否有效
+				var deferred = $.Deferred();
+				$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/auth?access_token="+access_token+"&openid="+openid,function(data){
+					if(!data.errmsg){
+						console.log("错误");
+					}else{
+						deferred.resolve(data);
+					}
+				})
+				return deferred.promise();
+			}
 			
 			
 			
-			
-			
-			
-			//name：参数名称，return：有则返回该参数对应值，没有则返回null
 			function GetQueryStr(name){    
 			    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 			    var r = window.location.search.substr(1).match(reg);
@@ -68,6 +106,61 @@
 				return location.href;
 			}
 			
+			function setStorage(name,value){
+			    localStorage.setItem(name, value);
+			}
+			
+			function getStorage(name){
+			   return localStorage.getItem(name);
+			}
+			
+			function delStorage(name){
+				return localStorage.removeItem(name);
+			}
+			
+			
+			
+			
+			
+			
+//			//通过code换取网页授权access_token
+//			$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appID+"&secret="+appsecret+"&code="+code+"&grant_type=authorization_code",function(data){
+//				console.log(data);
+//				refresh_token = data.refresh_token;
+//				openid = data.openid;
+//				setStorage("refresh_token",refresh_token);
+//				setStorage("openid",openid);
+//			})
+//			//刷新access_token（如果需要）
+//			$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid="+appID+"&grant_type=refresh_token&refresh_token="+refresh_token,function(data){
+//				console.log(data);
+//				if (data.errmsg){
+//					console.log("错误，请重新登录");
+//				}else{
+//					refresh_token = data.refresh_token;
+//					openid = data.openid;
+//					setStorage("refresh_token",refresh_token);
+//					setStorage("openid",openid);
+//				}
+//			})
+//			//拉取用户信息(需scope为 snsapi_userinfo)
+//			$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/userinfo?access_token="+access_token+"&openid="+openid+"&lang=zh_CN",function(data){
+//				console.log(data);
+//				var nickname = data.nickname;   //用户昵称
+//				var sex = data.sex;				//用户的性别，值为1时是男性，值为2时是女性，值为0时是未知
+//				var headimgurl = data.headimgurl; //用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。
+//			})
+//			
+//			
+//			//检验授权凭证（access_token）是否有效
+//			$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/auth?access_token="+access_token+"&openid="+openid,function(data){
+//				console.log(data);
+//				if(data.errcode==0){
+//					console.log("access_token有效");
+//				}else{
+//					console.log("access_token无效");
+//				}
+//			})
 		</script>
 	</body>
 </html>
