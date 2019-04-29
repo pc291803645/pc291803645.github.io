@@ -73,7 +73,7 @@
 			
 			if(access_token&&openid){ 
 				yzAccess_token(access_token,openid).then(function(data){
-					if(data.errcode===0){
+					if(data){
 						getUserinfo(access_token,openid).then(function(data){
 							console.log(data);
 							var sex;
@@ -98,6 +98,7 @@
 						delStorage("access_token");
 						delStorage("openid");
 						location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+					
 					}
 				})
 			}else{
@@ -106,31 +107,38 @@
 				}
 				getAccess_token(appID,appsecret,code).then(function(data){
 					console.log(data);
-					access_token = data.access_token;
-					refresh_token = data.refresh_token;
-					openid = data.openid;
-					setStorage("access_token",access_token);
-					setStorage("openid",openid);
+					if(data){
+						access_token = data.access_token;
+						refresh_token = data.refresh_token;
+						openid = data.openid;
+						setStorage("access_token",access_token);
+						setStorage("openid",openid);
+						
+						getUserinfo(access_token,openid).then(function(data){
+							console.log(data);
+							var sex;
+							if(data.sex==1){
+								sex="男";
+							}else if(data.sex==0){
+								sex="女";
+							}else{
+								sex="未知";
+							}
+							var html = '<div class="headimg">'+
+											'<img src="'+data.headimgurl+'"/>'+
+										'</div>'+
+										'<p>姓名：'+data.nickname+'</p>'+
+										'<p>性别：'+sex+'</p>'+
+										'<p>城市：'+data.province+data.city+'</p>'
+											
+							$(".info").append(html);
+						})
+					}else{
+						delStorage("access_token");
+						delStorage("openid");
+						location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+					}
 					
-					getUserinfo(access_token,openid).then(function(data){
-						console.log(data);
-						var sex;
-						if(data.sex==1){
-							sex="男";
-						}else if(data.sex==0){
-							sex="女";
-						}else{
-							sex="未知";
-						}
-						var html = '<div class="headimg">'+
-										'<img src="'+data.headimgurl+'"/>'+
-									'</div>'+
-									'<p>姓名：'+data.nickname+'</p>'+
-									'<p>性别：'+sex+'</p>'+
-									'<p>城市：'+data.province+data.city+'</p>'
-										
-						$(".info").append(html);
-					})
 				})
 			}
 			
@@ -143,6 +151,7 @@
 				$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appID+"&secret="+appsecret+"&code="+code+"&grant_type=authorization_code",function(data){
 					if(data.errmsg){
 						console.log("错误");
+						deferred.resolve(false);
 					}else{
 						deferred.resolve(data);
 					}
@@ -154,6 +163,7 @@
 				$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid="+appID+"&grant_type=refresh_token&refresh_token="+refresh_token,function(data){
 					if(data.errmsg){
 						console.log("错误");
+						deferred.resolve(false);
 					}else{
 						deferred.resolve(data);
 					}
@@ -166,6 +176,7 @@
 				$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/userinfo?access_token="+access_token+"&openid="+openid+"&lang=zh_CN",function(data){
 					if(data.errmsg){
 						console.log("错误");
+						deferred.resolve(false);
 					}else{
 						deferred.resolve(data);
 					}
@@ -176,7 +187,11 @@
 			function yzAccess_token(access_token,openid){  //检验授权凭证（access_token）是否有效
 				var deferred = $.Deferred();
 				$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/auth?access_token="+access_token+"&openid="+openid,function(data){
-					deferred.resolve(data);
+					if(data.errcode===0){
+						deferred.resolve(true);
+					}else{
+						deferred.resolve(false);
+					}
 				})
 				return deferred.promise();
 			}
