@@ -18,5 +18,26 @@
 		<div class="dome">
 			<h1>这里是WeChat测试</h1>
 		</div>
+		
+		
+		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			var appID = "wx3c24ff62adc55b88";                      //开发者ID(AppID)
+			var appsecret = "548c4ea93207b661aab7627839088352";    //开发者密码
+			var URL = location.href;
+			
+			console.log(url)
+			
+			
+			
+			
+			//name：参数名称，return：有则返回该参数对应值，没有则返回null
+			function GetQueryStr(name){    
+			    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			    var r = window.location.search.substr(1).match(reg);
+			    if(r!=null)return  unescape(r[2]); return null;
+			}
+		</script>
 	</body>
 </html>
