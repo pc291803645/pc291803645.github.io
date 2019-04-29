@@ -202,7 +202,7 @@
 			}
 			
 			function getCurrentUrl() {
-				var urls = (location.href.split("#")[0]);  //encodeURIComponent
+				var urls = encodeURIComponent(location.href.split("?")[0]);
 				return urls;
 			}
 			
