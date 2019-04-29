@@ -29,12 +29,18 @@
 			var current_url = encodeURIComponent(getCurrentUrl());			//当前url
 			var code = GetQueryStr('code');
 			
-			
+			//第一步：用户同意授权，获取code
 			if(!code) { 											//静默授权：scope=snsapi_base  一般授权scope=snsapi_userinfo 
 				var urls = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
 				location.href = urls;
 			}
-			console.log(code);
+			
+			//第二步：通过code换取网页授权access_token
+			$.getJSON("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appID+"&secret="+appsecret+"&code="+code+"&grant_type=authorization_code",function(data){
+				console.log(data);
+			})
+			
+			
 			
 			
 			//name：参数名称，return：有则返回该参数对应值，没有则返回null
