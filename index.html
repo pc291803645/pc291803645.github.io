@@ -133,12 +133,7 @@
 											
 							$(".info").append(html);
 						})
-					}else{
-						delStorage("access_token");
-						delStorage("openid");
-						location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
 					}
-					
 				})
 			}
 			
