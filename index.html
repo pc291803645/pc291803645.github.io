@@ -20,15 +20,19 @@
 		</div>
 		
 		
-		<script src="js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.12.4.js" type="text/javascript"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 		
 		<script type="text/javascript">
 			var appID = "wx3c24ff62adc55b88";                      //开发者ID(AppID)
 			var appsecret = "548c4ea93207b661aab7627839088352";    //开发者密码
-			var URL = location.href;
+			var current_url = encodeURI(getCurrentUrl());			//当前url
+			var code = GetQueryStr('code');
 			
-			console.log(URL)
-			
+			if(!code) { 
+				var urls = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=123#wechat_redirect';
+				location.href = urls;
+			}
 			
 			
 			
@@ -38,6 +42,11 @@
 			    var r = window.location.search.substr(1).match(reg);
 			    if(r!=null)return  unescape(r[2]); return null;
 			}
+			
+			function getCurrentUrl() {
+				return location.href;
+			}
+			
 		</script>
 	</body>
 </html>
