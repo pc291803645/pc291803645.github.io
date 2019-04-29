@@ -24,15 +24,15 @@
 		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 		
 		<script type="text/javascript">
-			var appID = "wx3c24ff62adc55b88";                      //开发者ID(AppID)
-			var appsecret = "548c4ea93207b661aab7627839088352";    //开发者密码
-			var current_url = encodeURIComponent(getCurrentUrl());			//当前url
+			var appID = "wx3c24ff62adc55b88";                       //开发者ID(AppID)
+			var appsecret = "548c4ea93207b661aab7627839088352";   	//开发者密码
+			var current_url = encodeURIComponent(getCurrentUrl());	//当前url
 			var code = GetQueryStr('code');							//url的code
-			var jsonBird = "https://bird.ioliu.cn/v1/?url="   //jsonBird 是第三方跨域代理
+			var jsonBird = "https://bird.ioliu.cn/v1/?url="   		//jsonBird 是第三方跨域代理
+			var refresh_token;										//用户刷新access_token;
+			var	openid;												//用户唯一标识，请注意，在未关注公众号时，用户访问公众号的网页，也会产生一个用户和公众号唯一的OpenID
 			
-			var refresh_token,	//用户刷新access_token;
-				openid,			//用户唯一标识，请注意，在未关注公众号时，用户访问公众号的网页，也会产生一个用户和公众号唯一的OpenID
-				
+			console.log(code);
 			
 			//第一步：用户同意授权，获取code
 			if(!code) { 											//静默授权：scope=snsapi_base  一般授权scope=snsapi_userinfo 
