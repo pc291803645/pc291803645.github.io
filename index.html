@@ -6,17 +6,51 @@
 		<title>WeChat测试</title>
 		<style type="text/css">
 			*{margin: 0; padding: 0;}
+			body{
+				background-color: #efeff4;
+			}
 			h1{
 				padding: 50px 0;
 				text-align: center;
 				color: #44b549;
 				font-size: 16px;
 			}
+			.info{
+				margin: 40px auto 0 auto; 
+				width: 60%;
+				
+			}
+			.info p{
+				font-size: 14px;
+				color: #333333;
+				padding: 4px 0;
+			}
+			.headimg{
+				margin: 0 auto;
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				overflow: hidden;
+			}
+			.headimg img{
+				width: 100%;
+				height: 100%;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="dome">
 			<h1>这里是WeChat测试</h1>
+			
+			
+			<div class="info">
+				<!--<div class="headimg">
+					<img src="img/about_02.png"/>
+				</div>
+				<p>姓名：小明</p>
+				<p>性别：男</p>
+				<p>城市：广州</p>-->
+			</div>
 		</div>
 		
 		
@@ -42,7 +76,22 @@
 					if(data.errcode==0){
 						getUserinfo(access_token,openid).then(function(data){
 							console.log(data);
-							
+							var sex;
+							if(data.sex==1){
+								sex="男";
+							}else if(data.sex==0){
+								sex="女";
+							}else{
+								sex="未知";
+							}
+							var html = '<div class="headimg">'+
+											'<img src="'+data.headimgurl+'"/>'+
+										'</div>'+
+										'<p>姓名：'+data.nickname+'</p>'+
+										'<p>性别：'+sex+'</p>'+
+										'<p>城市：'+data.province+data.city+'</p>'
+										
+							$(".info").append(html);
 						})
 					}else{
 						console.log("access_token无效");
@@ -65,7 +114,22 @@
 					
 					getUserinfo(access_token,openid).then(function(data){
 						console.log(data);
-						
+						var sex;
+						if(data.sex==1){
+							sex="男";
+						}else if(data.sex==0){
+							sex="女";
+						}else{
+							sex="未知";
+						}
+						var html = '<div class="headimg">'+
+										'<img src="'+data.headimgurl+'"/>'+
+									'</div>'+
+									'<p>姓名：'+data.nickname+'</p>'+
+									'<p>性别：'+sex+'</p>'+
+									'<p>城市：'+data.province+data.city+'</p>'
+										
+						$(".info").append(html);
 					})
 				})
 			}
