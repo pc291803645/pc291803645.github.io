@@ -34,16 +34,43 @@
 			var	openid = getStorage("openid")?getStorage("openid"):"";						//用户唯一标识，请注意，在未关注公众号时，用户访问公众号的网页，也会产生一个用户和公众号唯一的OpenID
 			
 			
-			//用户同意授权，获取code。静默授权：scope=snsapi_base  一般授权scope=snsapi_userinfo 
-			if(!code) { 
-				var urls = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
-				location.href = urls;
+			
+			
+			
+			if(access_token&&openid){ 
+				yzAccess_token(access_token,openid).then(function(data){
+					if(data.errcode==0){
+						getUserinfo(access_token,openid).then(function(data){
+							console.log(data);
+							
+						})
+					}else{
+						console.log("access_token无效");
+						delStorage(access_token);
+						delStorage(openid);
+						location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
+					}
+				})
+			}else{
+				if(!code) { 
+					location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
+				}
+				getAccess_token(appID,appsecret,code).then(function(data){
+					console.log(data);
+					access_token = data.access_token;
+					refresh_token = data.refresh_token;
+					openid = data.openid;
+					setStorage("access_token",access_token);
+					setStorage("openid",openid);
+					
+					getUserinfo(access_token,openid).then(function(data){
+						console.log(data);
+						
+					})
+				})
 			}
 			
 			
-			getAccess_token(appID,appsecret,code).then(function(data){
-				console.log(data);
-			})
 			
 			
 			
@@ -120,6 +147,13 @@
 			
 			
 			
+			
+			
+//			//用户同意授权，获取code。静默授权：scope=snsapi_base  一般授权scope=snsapi_userinfo 
+//			if(!code) { 
+//				var urls = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
+//				location.href = urls;
+//			}
 			
 			
 			
