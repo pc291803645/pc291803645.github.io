@@ -60,7 +60,7 @@
 		<script type="text/javascript">
 			var appID = "wx3c24ff62adc55b88";                       //开发者ID(AppID)
 			var appsecret = "548c4ea93207b661aab7627839088352";   	//开发者密码
-			var current_url = encodeURIComponent(getCurrentUrl());	//当前url
+			var current_url = getCurrentUrl();						//当前url
 			var code = GetQueryStr('code');							//url的code
 			var jsonBird = "https://bird.ioliu.cn/v1/?url="   		//jsonBird 是第三方跨域代理
 			var refresh_token = getStorage("refresh_token")?getStorage("refresh_token"):"";	//用户刷新access_token;
@@ -190,7 +190,8 @@
 			}
 			
 			function getCurrentUrl() {
-				return location.href;
+				var urls = encodeURIComponent(location.href.split("#")[0]);
+				return urls;
 			}
 			
 			function setStorage(name,value){
