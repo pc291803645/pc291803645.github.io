@@ -112,11 +112,7 @@
 			function yzAccess_token(access_token,openid){  //检验授权凭证（access_token）是否有效
 				var deferred = $.Deferred();
 				$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/auth?access_token="+access_token+"&openid="+openid,function(data){
-					if(data.errmsg){
-						console.log("错误");
-					}else{
-						deferred.resolve(data);
-					}
+					deferred.resolve(data);
 				})
 				return deferred.promise();
 			}
