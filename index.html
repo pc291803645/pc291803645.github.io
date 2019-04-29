@@ -30,10 +30,10 @@
 			var code = GetQueryStr('code');
 			
 			alert(current_url);
-//			if(!code) { 											//静默授权：scope=snsapi_base  一般授权scope=snsapi_userinfo 
-//				var urls = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
-//				location.href = urls;
-//			}
+			if(!code) { 											//静默授权：scope=snsapi_base  一般授权scope=snsapi_userinfo 
+				var urls = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
+				location.href = urls;
+			}
 			console.log(code);
 			
 			
