@@ -94,6 +94,7 @@
 							$(".info").append(html);
 						})
 					}else{
+						alert(JSON.stringify(data));
 						console.log("access_token无效");
 						delStorage(access_token);
 						delStorage(openid);
