@@ -48,12 +48,12 @@
 						console.log("access_token无效");
 						delStorage(access_token);
 						delStorage(openid);
-						location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
+						location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=nsapi_userinfo&state=STATE#wechat_redirect';
 					}
 				})
 			}else{
 				if(!code) { 
-					location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
+					location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=nsapi_userinfo&state=STATE#wechat_redirect';
 				}
 				getAccess_token(appID,appsecret,code).then(function(data){
 					console.log(data);
