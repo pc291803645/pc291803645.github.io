@@ -45,14 +45,12 @@
 				refresh_token = data.refresh_token;
 				openid = data.openid;
 				console.log(data);
-				
-				//第三步：刷新access_token（如果需要）
-			$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid="+appID+"&grant_type=refresh_token&refresh_token="+refresh_token,function(data){
-				console.log(data);
-			})
 			})
 			
-			
+//			//第三步：刷新access_token（如果需要）
+//			$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid="+appID+"&grant_type=refresh_token&refresh_token="+refresh_token,function(data){
+//				console.log(data);
+//			})
 			
 			
 			
