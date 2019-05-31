@@ -67,16 +67,12 @@
 			var access_token  = getStorage("access_token")?getStorage("access_token"):"";	//网页授权接口调用凭证,注意：此access_token与基础支持的access_token不同
 			var	openid = getStorage("openid")?getStorage("openid"):"";						//用户唯一标识，请注意，在未关注公众号时，用户访问公众号的网页，也会产生一个用户和公众号唯一的OpenID
 			
-			console.log(current_url);
-			console.log(access_token,openid);
-			
 			//code 地址栏只能出现一个code，重复会出现死循环自动登陆，后边因为code失效需要再次重定向的时候，注意把url 处理好，获取到的url 裁减掉 带有的code字段；
 			
 			if(access_token&&openid){ 
 				yzAccess_token(access_token,openid).then(function(data){
 					if(data){
 						getUserinfo(access_token,openid).then(function(data){
-							console.log(data);
 							var sex;
 							if(data.sex==1){
 								sex="男";
@@ -107,7 +103,6 @@
 					location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + appID + '&redirect_uri=' + current_url + '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
 				}
 				getAccess_token(appID,appsecret,code).then(function(data){
-					console.log(data);
 					if(data){
 						access_token = data.access_token;
 						refresh_token = data.refresh_token;
@@ -116,7 +111,6 @@
 						setStorage("openid",openid);
 						
 						getUserinfo(access_token,openid).then(function(data){
-							console.log(data);
 							var sex;
 							if(data.sex==1){
 								sex="男";
@@ -142,6 +136,7 @@
 			
 			
 			$.getJSON(jsonBird+"https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+access_token+"&type=jsapi",function(data){
+				console.log(access_token);
 				console.log(data);
 			})
 			
