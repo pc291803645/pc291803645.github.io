@@ -144,6 +144,8 @@
 			
 			
 			
+			
+			
 			function getAccess_token(appID,appsecret,code){  //通过code换取网页授权access_token
 				var deferred = $.Deferred();
 				$.getJSON(jsonBird+"https://api.weixin.qq.com/sns/oauth2/access_token?appid="+appID+"&secret="+appsecret+"&code="+code+"&grant_type=authorization_code",function(data){
