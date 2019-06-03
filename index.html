@@ -140,15 +140,16 @@
 			
 			//获取基础接口access_token
 			$.getJSON(jsonBird+"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+appID+"&secret="+appsecret,function(data){
-				console.log(data);
+				var access_token = data.access_token;  //基础接口的access_token；
+				//获取jsapi_ticket
+				$.getJSON(jsonBird+"https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+access_token+"&type=jsapi",function(data){
+					console.log(data);
+				})
 			})
 			
 			
 			
-//			$.getJSON(jsonBird+"https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+access_token+"&type=jsapi",function(data){
-//				console.log(access_token);
-//				console.log(data);
-//			})
+
 			
 			
 			
