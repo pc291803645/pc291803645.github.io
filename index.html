@@ -135,7 +135,7 @@
 			}
 			
 			
-			$.getJSON("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+access_token+"&type=jsapi",function(data){
+			$.getJSON(jsonBird+"https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token="+access_token+"&type=jsapi",function(data){
 				console.log(access_token);
 				console.log(data);
 			})
