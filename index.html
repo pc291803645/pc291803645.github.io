@@ -39,6 +39,10 @@
 				width: 100%;
 				height: 100%;
 			}
+			.btn-wrap{
+				margin: 30px auto 0 auto;
+				width: 60%;
+			}
 		</style>
 	</head>
 	<body>
@@ -53,6 +57,10 @@
 				<p>姓名：小明</p>
 				<p>性别：男</p>
 				<p>城市：广州</p>-->
+			</div>
+			
+			<div class="btn-wrap">
+				<button id="scanQRCode">扫一扫</button>
 			</div>
 			
 		</div>
@@ -170,24 +178,48 @@
 				    timestamp: timestamp, // 必填，生成签名的时间戳（精确到秒）
 				    nonceStr: nonceStr, // 必填，生成签名的随机串
 				    signature: sha1(signature),// 必填，签名,sha1加密
-				    jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表
+				    jsApiList: ['scanQRCode','updateAppMessageShareData','updateTimelineShareData'] // 必填，需要使用的JS接口列表
 				});
 			}
 			
 			
 			wx.ready(function(){
-				wx.scanQRCode({
-					needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-					scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-					success: function (res) {
-						var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-						alert(result);
-					}
-				});
+				var urls = location.href.split("#")[0];
+				 wx.updateAppMessageShareData({ 
+			        title: '测试获取个人微信信息', // 分享标题
+			        desc: '测试获取个人微信信息，嘿嘿嘿~', // 分享描述
+			        link: urls, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			        imgUrl: 'img/about_02.png', // 分享图标
+			        success: function () {
+			          // 设置成功
+			          alert("分享成功~");
+			        }
+			    })
+				
+				wx.updateTimelineShareData({ 
+			        title: '测试获取个人微信信息', // 分享标题
+			        link: '测试获取个人微信信息，嘿嘿嘿~', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			        imgUrl: urls, // 分享图标
+			        success: function () {
+			          // 设置成功
+			          alert("分享成功~");
+			        }
+			    })
 				
 				
 				
 			})
+			
+			$("#scanQRCode").click(function(){
+				wx.scanQRCode({
+					needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+					scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+					success: function (res) {
+						var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+					}
+				});
+			})
+			
 			
 			
 			
