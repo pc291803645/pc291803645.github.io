@@ -171,7 +171,6 @@
 				var current_url = location.href.split("#")[0]
 				var signature = "jsapi_ticket="+jsapi_ticket+"&noncestr="+nonceStr+"&timestamp="+timestamp+"&url="+current_url;
 				
-				console.log(current_url);
 				wx.config({
 				    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 				    appId: appID, // 必填，公众号的唯一标识
@@ -185,24 +184,24 @@
 			
 			wx.ready(function(){
 				var urls = location.href.split("#")[0];
-				 wx.updateAppMessageShareData({ 
-			        title: '测试获取个人微信信息', // 分享标题
+				 wx.updateAppMessageShareData({   //需在用户可能点击分享按钮前就先调用
+			        title: '个人信息', // 分享标题
 			        desc: '测试获取个人微信信息，嘿嘿嘿~', // 分享描述
 			        link: urls, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-			        imgUrl: 'img/about_02.png', // 分享图标
+			        imgUrl: 'https://pc291803645.github.io/img/about_02.png', // 分享图标
 			        success: function () {
 			          // 设置成功
-			          alert("分享成功~");
+			          
 			        }
 			    })
 				
-				wx.updateTimelineShareData({ 
-			        title: '测试获取个人微信信息', // 分享标题
+				wx.updateTimelineShareData({   //需在用户可能点击分享按钮前就先调用
+			        title: '个人信息', // 分享标题
 			        link: '测试获取个人微信信息，嘿嘿嘿~', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 			        imgUrl: urls, // 分享图标
 			        success: function () {
 			          // 设置成功
-			          alert("分享成功~");
+			          
 			        }
 			    })
 				
